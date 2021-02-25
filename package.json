@@ -9,12 +9,15 @@
     "build": "tsc",
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "test": "jest",
-    "test:staged": "jest"
+    "test:staged": "jest",
+    "typeorm": "NODE_ENV=production ts-node ./node_modules/typeorm/cli.js --config ormconfig.js",
+    "typeorm:dev": "NODE_ENV=development ts-node ./node_modules/typeorm/cli.js --config ormconfig.js"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "typeorm": "^0.2.31"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
