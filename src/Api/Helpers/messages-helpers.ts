@@ -11,3 +11,8 @@ export const USER_MESSAGES = {
   sessionSucess: 'Create session with success',
   sessionFailure: 'Create session failure',
 } as const;
+
+export const TOKEN_MESSAGES = {
+  missingToken: 'Token is missing',
+  invalidToken: 'Invalid token',
+} as const;
