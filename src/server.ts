@@ -5,8 +5,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 
 import { DatabaseConnection } from './Infrastructure/Database';
-import { serverError } from './Helpers/http-error-helpers';
-import { envConfig } from './Helpers/env-configs';
+import { serverError } from './Api/Helpers/http-error-helpers';
+import { envConfig } from './Api/Configs/env-configs';
 
 export class Server {
   protected _port: string;
@@ -42,11 +42,7 @@ export class Server {
 
   public start(): void {
     this._server.listen(envConfig.connectionPort || this._port, () => {
-      console.info(
-        `This server is listening on http://localhost:${
-          envConfig.connectionPort || this._port
-        }`,
-      );
+      console.info(`This server is listening on http://localhost:${envConfig.connectionPort || this._port}`);
     });
   }
 

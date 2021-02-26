@@ -3,12 +3,11 @@ import { UpdateUserDto } from 'src/Application/Dtos/UpdateUserDto';
 import { CreateComicDto } from 'src/Application/Dtos/CreateComicDto';
 import { CreateCharacterDto } from 'src/Application/Dtos/CreateCharacterDto';
 
-import { HttpResponse } from 'src/Helpers/http-error-helpers';
+import { HttpResponse } from 'src/Api/Helpers/http-error-helpers';
 
 export interface IUserService {
   create(data: CreateUserDto): Promise<HttpResponse>;
   update(data: UpdateUserDto): Promise<HttpResponse>;
-  delete(id: string): Promise<HttpResponse>;
   session(email: string, password: string): Promise<HttpResponse>;
 
   addFavoriteComic(data: CreateComicDto): Promise<HttpResponse>;
@@ -17,5 +16,5 @@ export interface IUserService {
 
   addFavoriteCharacter(data: CreateCharacterDto): Promise<HttpResponse>;
   getFavoriteCharacter(userId: string): Promise<HttpResponse>;
-  removeFavoriteComic(characterId: string): Promise<HttpResponse>;
+  removeFavoriteCharacter(characterId: string): Promise<HttpResponse>;
 }

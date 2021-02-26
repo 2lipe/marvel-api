@@ -11,4 +11,6 @@ export const envConfig = {
   databasePassword: process.env.DATABASE_PASSWORD,
 
   connectionPort: process.env.SERVER_PORT,
+
+  jwtKey: process.env.JWT_KEY,
 };
