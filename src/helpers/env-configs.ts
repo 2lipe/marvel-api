@@ -9,4 +9,6 @@ export const envConfig = {
   databasePort: process.env.DATABASE_PORT,
   databaseUsername: process.env.DATABASE_USERNAME,
   databasePassword: process.env.DATABASE_PASSWORD,
+
+  connectionPort: process.env.SERVER_PORT,
 };
