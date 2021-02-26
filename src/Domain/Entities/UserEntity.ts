@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 import { ComicEntity } from './ComicEntity';
-import { HeroEntity } from './HeroEntity';
+import { CharacterEntity } from './CharacterEntity';
 
 @Entity('User')
 export class UserEntity {
@@ -30,8 +30,8 @@ export class UserEntity {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => HeroEntity, hero => hero.user)
-  hero: HeroEntity[];
+  @OneToMany(() => CharacterEntity, character => character.user)
+  character: CharacterEntity[];
 
   @OneToMany(() => ComicEntity, comic => comic.user)
   comic: ComicEntity[];

@@ -10,13 +10,13 @@ import {
 
 import { UserEntity } from './UserEntity';
 
-@Entity('Hero')
-export class HeroEntity {
+@Entity('Character')
+export class CharacterEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  heroId: string;
+  characterId: string;
 
   @Column()
   name: string;
@@ -39,7 +39,7 @@ export class HeroEntity {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => UserEntity, user => user.hero)
+  @ManyToOne(() => UserEntity, user => user.character)
   @JoinColumn({ name: 'userId' })
   user: UserEntity;
 }
