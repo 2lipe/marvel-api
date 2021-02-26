@@ -1,20 +1,11 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 import { ComicEntity } from './ComicEntity';
 import { CharacterEntity } from './CharacterEntity';
+import { BaseEntity } from './BaseEntity';
 
 @Entity('User')
-export class UserEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class UserEntity extends BaseEntity {
   @Column()
   name: string;
 
@@ -23,12 +14,6 @@ export class UserEntity {
 
   @Column()
   password: string;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 
   @OneToMany(() => CharacterEntity, character => character.user)
   character: CharacterEntity[];

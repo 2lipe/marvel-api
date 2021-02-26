@@ -1,20 +1,10 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 
+import { BaseEntity } from './BaseEntity';
 import { UserEntity } from './UserEntity';
 
 @Entity('Character')
-export class CharacterEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class CharacterEntity extends BaseEntity {
   @Column()
   characterId: string;
 
@@ -32,12 +22,6 @@ export class CharacterEntity {
 
   @Column()
   userId: string;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 
   @ManyToOne(() => UserEntity, user => user.character)
   @JoinColumn({ name: 'userId' })

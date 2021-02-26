@@ -9,7 +9,7 @@ export class UserRepository extends Repository<UserEntity> implements IUserRepos
   public async createUser(data: CreateUserDto): Promise<UserEntity> {
     const { password, name, email } = data;
 
-    const user = this.create({ name: name, email: email, password: password });
+    const user = this.create({ name, email, password });
 
     await this.save(user);
 
@@ -19,7 +19,7 @@ export class UserRepository extends Repository<UserEntity> implements IUserRepos
   updateUser(data: Omit<UpdateUserDto, 'oldPassword'>): Promise<UpdateResult> {
     const { id, email, name, password } = data;
 
-    const res = this.update({ id: id }, { email: email, name: name, password: password });
+    const res = this.update({ id: id }, { email, name, password });
 
     return res;
   }
