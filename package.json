@@ -7,20 +7,28 @@
   "license": "ISC",
   "scripts": {
     "build": "tsc",
-    "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "dev": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "dev:server": "NODE_ENV=development ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/index.ts",
     "test": "jest",
     "test:staged": "jest",
     "typeorm": "NODE_ENV=production ts-node ./node_modules/typeorm/cli.js --config ormconfig.js",
-    "typeorm:dev": "NODE_ENV=development ts-node ./node_modules/typeorm/cli.js --config ormconfig.js"
+    "typeorm:dev": "NODE_ENV=development ts-node ./node_modules/typeorm/cli.js --config ormconfig.js",
+    "postinstall": "husky install"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-unless": "^0.5.0",
+    "helmet": "^4.4.1",
     "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.31"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.11",
+    "@types/helmet": "^4.0.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.31",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
@@ -33,12 +41,24 @@
     "eslint-plugin-prettier": "^3.3.1",
     "git-commit-msg-linter": "^3.0.0",
     "husky": "^5.1.1",
+    "install": "^0.13.0",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "ts-jest": "^26.5.2",
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.2",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.2.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/*/": [
+      "yarn lint --fix"
+    ]
   }
 }
