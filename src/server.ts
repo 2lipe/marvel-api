@@ -13,7 +13,7 @@ export class Server {
 
   constructor(port: number) {
     this._server = express();
-    this._port = port;
+    this._port = ports;
   }
 
   public async init(): Promise<void> {
