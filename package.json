@@ -7,8 +7,8 @@
   "license": "ISC",
   "scripts": {
     "build": "tsc",
-    "dev": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register src/index.ts",
-    "dev:server": "NODE_ENV=development ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/index.ts",
+    "dev": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register src/Api/index.ts",
+    "dev:server": "NODE_ENV=development ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/Api/index.ts",
     "lint": "eslint src --max-warnings=0",
     "test": "jest",
     "test:staged": "jest",

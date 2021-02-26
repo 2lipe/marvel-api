@@ -4,9 +4,9 @@ import express, { Application, Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
-import { DatabaseConnection } from './Infrastructure/Database';
-import { serverError } from './Api/Helpers/http-error-helpers';
-import { envConfig } from './Api/Configs/env-configs';
+import { DatabaseConnection } from '../Infrastructure/Database';
+import { serverError } from '../Api/Helpers/http-error-helpers';
+import { envConfig } from '../Api/Configs/env-configs';
 
 export class Server {
   protected _port: string;
