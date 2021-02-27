@@ -4,10 +4,10 @@ import express, { Application, Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
+import { routes } from './Routes';
 import { DatabaseConnection } from '../Infrastructure/Database';
 import { serverError } from '../Api/Helpers/http-error-helpers';
 import { envConfigs } from '../Api/Configs/env-configs';
-import { routes } from './Routes';
 import { authMiddleware } from './Middlewares/AuthMiddleware';
 import { pathConfigs } from './Configs/path-configs';
 

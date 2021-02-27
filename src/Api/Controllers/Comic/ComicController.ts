@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { ComicSchemas } from 'src/Application/Schemas/ComicSchema';
+import { ComicSchemas } from '../../../Application/Schemas/ComicSchema';
 
 import { joiResponseError, responseTreated } from '../../../Api/Helpers/http-error-helpers';
 import { ComicService } from '../../../Application/Services/ComicService';

@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import { UserController } from '../../../Api/Controllers/User/UserController';
 
 const userRoutes = Router();
@@ -8,4 +9,4 @@ userRoutes.post('/create', userController.create);
 userRoutes.post('/update', userController.update);
 userRoutes.post('/session', userController.session);
 
-export default userRoutes;
+export { userRoutes };
