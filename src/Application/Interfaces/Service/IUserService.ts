@@ -12,9 +12,9 @@ export interface IUserService {
 
   addFavoriteComic(data: CreateComicDto): Promise<HttpResponse>;
   getFavoriteComic(userId: string): Promise<HttpResponse>;
-  removeFavoriteComic(comicId: string): Promise<HttpResponse>;
+  removeFavoriteComic(comicId: string, userId: string): Promise<HttpResponse>;
 
   addFavoriteCharacter(data: CreateCharacterDto): Promise<HttpResponse>;
   getFavoriteCharacter(userId: string): Promise<HttpResponse>;
-  removeFavoriteCharacter(characterId: string): Promise<HttpResponse>;
+  removeFavoriteCharacter(characterId: string, userId: string): Promise<HttpResponse>;
 }

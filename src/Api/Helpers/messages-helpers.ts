@@ -12,6 +12,17 @@ export const USER_MESSAGES = {
   sessionFailure: 'Create session failure',
 } as const;
 
+export const COMIC_MESSAGES = {
+  addSucess: 'Comic add with success.',
+  addFailure: 'Failure with add comic',
+
+  getSuccess: 'Get favorites with success',
+  getFailure: 'Cannot get favorites commics',
+
+  removeSuccess: 'Remove comic from favorites with success',
+  removeFailure: 'Fail to remove comic from favorites',
+} as const;
+
 export const TOKEN_MESSAGES = {
   missingToken: 'Token is missing',
   invalidToken: 'Invalid token',

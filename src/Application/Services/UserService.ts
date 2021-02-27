@@ -4,7 +4,7 @@ import { compare, hash } from 'bcryptjs';
 import { emailError, genericError, HttpResponse, ok, userNotExistError } from '../../Api/Helpers/http-error-helpers';
 import { UserRepository } from '../../Infrastructure/Repositories/UserRepository';
 import { IUserRepository } from '../../Domain/IRepositories/IUserRepository';
-import { USER_MESSAGES } from '../../Api/Helpers/messages-helpers';
+import { COMIC_MESSAGES, USER_MESSAGES } from '../../Api/Helpers/messages-helpers';
 
 import { CreateCharacterDto } from '../Dtos/CreateCharacterDto';
 import { CreateComicDto } from '../Dtos/CreateComicDto';
@@ -12,6 +12,8 @@ import { CreateUserDto } from '../Dtos/CreateUserDto';
 import { UpdateUserDto } from '../Dtos/UpdateUserDto';
 import { IUserService } from '../Interfaces/Service/IUserService';
 import { generateJwtToken } from '../../Api/Helpers/jwt-helper';
+import { ComicRepository } from '../../Infrastructure/Repositories/ComicRepository';
+import { IComicRepository } from '../../Domain/IRepositories/IComicRepository';
 
 export class UserService implements IUserService {
   public async create(data: CreateUserDto): Promise<HttpResponse> {
@@ -122,16 +124,42 @@ export class UserService implements IUserService {
     }
   }
 
-  addFavoriteComic(data: CreateComicDto): Promise<HttpResponse> {
-    throw new Error('Method not implemented.');
+  public async addFavoriteComic(data: CreateComicDto): Promise<HttpResponse> {
+    try {
+      const comicRepository: IComicRepository = getCustomRepository(ComicRepository);
+
+      const res = await comicRepository.createComic(data);
+
+      return ok(res, COMIC_MESSAGES.addSucess);
+    } catch (err) {
+      return genericError({}, 500, COMIC_MESSAGES.addFailure);
+    }
   }
 
-  getFavoriteComic(userId: string): Promise<HttpResponse> {
-    throw new Error('Method not implemented.');
+  public async getFavoriteComic(userId: string): Promise<HttpResponse> {
+    try {
+      const comicRepository: IComicRepository = getCustomRepository(ComicRepository);
+
+      const comicsFavorites = await comicRepository.findComicById(userId);
+
+      const comics = comicsFavorites;
+
+      return ok(comics, COMIC_MESSAGES.getSuccess);
+    } catch (err) {
+      return genericError({}, 500, COMIC_MESSAGES.getFailure);
+    }
   }
 
-  removeFavoriteComic(comicId: string): Promise<HttpResponse> {
-    throw new Error('Method not implemented.');
+  public async removeFavoriteComic(comicId: string, userId: string): Promise<HttpResponse> {
+    try {
+      const comicRepository: IComicRepository = getCustomRepository(ComicRepository);
+
+      await comicRepository.deleteComic(comicId, userId);
+
+      return ok({}, COMIC_MESSAGES.removeSuccess);
+    } catch (err) {
+      return genericError({}, 500, COMIC_MESSAGES.removeFailure);
+    }
   }
 
   addFavoriteCharacter(data: CreateCharacterDto): Promise<HttpResponse> {
@@ -142,7 +170,7 @@ export class UserService implements IUserService {
     throw new Error('Method not implemented.');
   }
 
-  removeFavoriteCharacter(characterId: string): Promise<HttpResponse> {
+  removeFavoriteCharacter(characterId: string, userId: string): Promise<HttpResponse> {
     throw new Error('Method not implemented.');
   }
 }
