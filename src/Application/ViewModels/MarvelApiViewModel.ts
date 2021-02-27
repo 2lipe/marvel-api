@@ -1,7 +1,7 @@
 import { MarvelDataResult } from '../DataResults/MarvelDataResult';
 import { IMarvelResponseData } from '../Interfaces/Marvel/IMarvelResponseData';
 
-export class ResponseApiMarvelViewModel {
+export class MarvelApiViewModel {
   limit: number;
   total: number;
   count: number;
