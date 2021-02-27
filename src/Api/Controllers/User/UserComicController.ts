@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { responseTreated } from '../../../Api/Helpers/http-error-helpers';
+import { joiResponseError, responseTreated } from '../../../Api/Helpers/http-error-helpers';
 import { UserSchemas } from '../../../Application/Schemas/UserSchema';
 import { UserService } from '../../../Application/Services/UserService';
 
@@ -15,7 +15,7 @@ export class UserComicController {
 
       responseTreated(result, res);
     } catch (err) {
-      err.isJoi === true ? res.status(422).json(err) : next(err);
+      joiResponseError(err, res, next);
     }
   }
 
@@ -31,7 +31,7 @@ export class UserComicController {
 
       responseTreated(result, res);
     } catch (err) {
-      err.isJoi === true ? res.status(422).json(err) : next(err);
+      joiResponseError(err, res, next);
     }
   }
 
@@ -47,7 +47,7 @@ export class UserComicController {
 
       responseTreated(result, res);
     } catch (err) {
-      err.isJoi === true ? res.status(422).json(err) : next(err);
+      joiResponseError(err, res, next);
     }
   }
 }

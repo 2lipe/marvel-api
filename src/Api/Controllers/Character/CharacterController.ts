@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { responseTreated } from '../../../Api/Helpers/http-error-helpers';
+import { joiResponseError, responseTreated } from '../../../Api/Helpers/http-error-helpers';
 import { CharacterSchemas } from '../../../Application/Schemas/CharacterSchema';
 import { CharacterService } from '../../../Application/Services/CharacterService';
 
@@ -17,7 +17,7 @@ export class CharacterController {
 
       responseTreated(result, res);
     } catch (err) {
-      err.isJoi === true ? res.status(422).json(err) : next(err);
+      joiResponseError(err, res, next);
     }
   }
 
@@ -34,7 +34,7 @@ export class CharacterController {
 
       responseTreated(result, res);
     } catch (err) {
-      err.isJoi === true ? res.status(422).json(err) : next(err);
+      joiResponseError(err, res, next);
     }
   }
 }

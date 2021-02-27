@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ComicSchemas } from 'src/Application/Schemas/ComicSchema';
 
-import { responseTreated } from '../../../Api/Helpers/http-error-helpers';
+import { joiResponseError, responseTreated } from '../../../Api/Helpers/http-error-helpers';
 import { ComicService } from '../../../Application/Services/ComicService';
 
 export class ComicController {
@@ -17,7 +17,7 @@ export class ComicController {
 
       responseTreated(result, res);
     } catch (err) {
-      err.isJoi === true ? res.status(422).json(err) : next(err);
+      joiResponseError(err, res, next);
     }
   }
 
@@ -34,7 +34,7 @@ export class ComicController {
 
       responseTreated(result, res);
     } catch (err) {
-      err.isJoi === true ? res.status(422).json(err) : next(err);
+      joiResponseError(err, res, next);
     }
   }
 }
