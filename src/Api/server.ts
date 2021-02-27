@@ -6,10 +6,10 @@ import helmet from 'helmet';
 
 import { DatabaseConnection } from '../Infrastructure/Database';
 import { serverError } from '../Api/Helpers/http-error-helpers';
-import { envConfig } from '../Api/Configs/env-configs';
+import { envConfigs } from '../Api/Configs/env-configs';
 import { routes } from './Routes';
 import { authMiddleware } from './Middlewares/AuthMiddleware';
-import { unless } from './Configs/path-configs';
+import { pathConfigs } from './Configs/path-configs';
 
 export class Server {
   protected _port: string;
@@ -42,7 +42,7 @@ export class Server {
     this._server.use(helmet());
     this._server.use(express.urlencoded({ extended: true }));
     this._server.use(express.json());
-    this._server.use(authMiddleware.unless(unless));
+    this._server.use(authMiddleware.unless(pathConfigs.unless));
   }
 
   private routes() {
@@ -50,8 +50,8 @@ export class Server {
   }
 
   public start(): void {
-    this._server.listen(envConfig.connectionPort || this._port, () => {
-      console.info(`This server is listening on http://localhost:${envConfig.connectionPort || this._port}`);
+    this._server.listen(envConfigs.connectionPort || this._port, () => {
+      console.info(`This server is listening on http://localhost:${envConfigs.connectionPort || this._port}`);
     });
   }
 

@@ -1,10 +1,10 @@
 import { Server } from './server';
 
-import { envConfig } from './Configs/env-configs';
+import { envConfigs } from './Configs/env-configs';
 import { serverError } from './Helpers/http-error-helpers';
 
 (async (): Promise<void> => {
-  const server = new Server(envConfig.connectionPort!);
+  const server = new Server(envConfigs.connectionPort!);
 
   try {
     await server.init();

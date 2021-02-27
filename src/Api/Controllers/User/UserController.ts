@@ -3,12 +3,12 @@ import { NextFunction, Request, Response } from 'express';
 import { responseTreated } from '../../../Api/Helpers/http-error-helpers';
 import { IUserService } from '../../../Application/Interfaces/Service/IUserService';
 import { UserService } from '../../../Application/Services/UserService';
-import { createUserSchema, sessionUserSchema, updateUserSchema } from '../../../Application/Schema/UserSchema';
+import { Schemas } from '../../../Application/Schemas/UserSchema';
 
 export class UserController {
   async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      await createUserSchema.validateAsync(req.body);
+      await Schemas.userSchemas.createUserSchema.validateAsync(req.body);
 
       const userService: IUserService = new UserService();
 
@@ -22,7 +22,7 @@ export class UserController {
 
   async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      await updateUserSchema.validateAsync(req.body);
+      await Schemas.userSchemas.updateUserSchema.validateAsync(req.body);
 
       const userService: IUserService = new UserService();
 
@@ -36,7 +36,7 @@ export class UserController {
 
   async session(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      await sessionUserSchema.validateAsync(req.body);
+      await Schemas.userSchemas.sessionUserSchema.validateAsync(req.body);
 
       const userService: IUserService = new UserService();
 

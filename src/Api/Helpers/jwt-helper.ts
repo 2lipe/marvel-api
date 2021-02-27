@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 
-import { envConfig } from '../Configs/env-configs';
+import { envConfigs } from '../Configs/env-configs';
 
-const key = envConfig.jwtKey;
+const key = envConfigs.jwtKey;
 
 export function generateJwtToken(userId: string) {
   const token = jwt.sign({ userId }, key!);

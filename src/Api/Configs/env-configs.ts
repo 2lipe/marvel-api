@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-export const envConfig = {
+export const envConfigs = {
   databaseName: process.env.DATABASE_NAME,
   databaseType: process.env.DATABASE_TYPE,
   databaseHost: process.env.DATABASE_HOST,
@@ -14,14 +14,8 @@ export const envConfig = {
 
   jwtKey: process.env.JWT_KEY,
 
-  // databaseName: 'stoneDEV',
-  // databaseType: 'postgres',
-  // databaseHost: 'localhost',
-  // databasePort: 5432,
-  // databaseUsername: 'postgres',
-  // databasePassword: 'reallyStrongPwd123',
-
-  // connectionPort: 5000,
-
-  // jwtKey: 'b79a28f31aa7d9468a130ca09146a1d6',
+  apiMarvelUrl: process.env.MARVEL_URL,
+  apiMarvelHash: process.env.MARVEL_HASH,
+  apiMarvelKey: process.env.MARVEL_API_KEY,
+  apiMarvelTS: process.env.TIME_SPAN,
 };
