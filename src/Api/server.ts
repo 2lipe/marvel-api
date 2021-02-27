@@ -4,7 +4,7 @@ import express, { Application, Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
-import { routes } from './Routes';
+import { Routes } from './Routes/Routes';
 import { DatabaseConnection } from '../Infrastructure/Database';
 import { serverError } from '../Api/Helpers/http-error-helpers';
 import { envConfigs } from '../Api/Configs/env-configs';
@@ -46,7 +46,7 @@ export class Server {
   }
 
   private routes() {
-    this._server.use('/api', routes);
+    this._server.use('/api', Routes);
   }
 
   public start(): void {

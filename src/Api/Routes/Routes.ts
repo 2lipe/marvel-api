@@ -6,13 +6,13 @@ import { comicRoutes } from './Comic/ComicRoutes';
 import { userCharacterRoutes } from './User/UserCharacterRoutes';
 import { userComicRouter } from './User/UserComicRoutes';
 
-const routes = Router();
+const Routes = Router();
 
-routes.use('/user', userRoutes);
-routes.use('/user/character', userCharacterRoutes);
-routes.use('/user/comic', userComicRouter);
+Routes.use('/user', userRoutes);
+Routes.use('/user/character', userCharacterRoutes);
+Routes.use('/user/comic', userComicRouter);
 
-routes.use('/comic', comicRoutes);
-routes.use('/character', characterRoutes);
+Routes.use('/comic', comicRoutes);
+Routes.use('/character', characterRoutes);
 
-export { routes };
+export { Routes };
