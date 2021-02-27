@@ -16,8 +16,8 @@ export const COMIC_MESSAGES = {
   addSucess: 'Comic add with success.',
   addFailure: 'Failure with add comic',
 
-  getSuccess: 'Get favorites with success',
-  getFailure: 'Cannot get favorites comics',
+  getSuccess: 'Get comics with success',
+  getFailure: 'Cannot get comics',
 
   removeSuccess: 'Remove comic from favorites with success',
   removeFailure: 'Failure to remove comic from favorites',
@@ -28,7 +28,7 @@ export const CHARACTER_MESSAGES = {
   addFailure: 'Failure with add character',
 
   getSucess: 'Get character with success',
-  getFailure: 'Cannot get favorites comics',
+  getFailure: 'Cannot get characters',
 
   removeSuccess: 'Remove character from favorites with success',
   removeFailure: 'Failure to remove character from favorites',

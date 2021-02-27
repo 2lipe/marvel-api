@@ -1,6 +1,6 @@
 import { IMarvelResponseData } from '../../../Application/Interfaces/Marvel/IMarvelResponseData';
 
-export default interface ResponseMarvelDto {
+export interface ResponseMarvelDto {
   code: number;
   etag: string;
   status: string;

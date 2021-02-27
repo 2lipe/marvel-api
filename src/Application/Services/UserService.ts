@@ -13,9 +13,7 @@ import { UpdateUserDto } from '../Dtos/UpdateUserDto';
 import { IUserService } from '../Interfaces/Service/IUserService';
 import { generateJwtToken } from '../../Api/Helpers/jwt-helper';
 import { ComicRepository } from '../../Infrastructure/Repositories/ComicRepository';
-import { IComicRepository } from '../../Domain/IRepositories/IComicRepository';
 import { CharacterRepository } from '../../Infrastructure/Repositories/CharacterRepository';
-import { ICharacterRepository } from '../../Domain/IRepositories/ICharacterRepository';
 
 export class UserService implements IUserService {
   public async create(data: CreateUserDto): Promise<HttpResponse> {
@@ -46,7 +44,7 @@ export class UserService implements IUserService {
 
   public async update(data: UpdateUserDto): Promise<HttpResponse> {
     try {
-      const userRepository: IUserRepository = getCustomRepository(UserRepository);
+      const userRepository = getCustomRepository(UserRepository);
 
       const user = await userRepository.findUserById(data.id);
 
@@ -65,7 +63,6 @@ export class UserService implements IUserService {
         name: data.name,
         id: data.id,
         password: data.password,
-        oldPassword: '',
       });
 
       const oldPasswordIsNotPassed = data.password && !data.oldPassword;
@@ -86,7 +83,6 @@ export class UserService implements IUserService {
           name: data.name,
           id: data.id,
           password: newPassword,
-          oldPassword: '',
         });
       }
 
@@ -98,7 +94,7 @@ export class UserService implements IUserService {
 
   public async session(email: string, password: string): Promise<HttpResponse> {
     try {
-      const userRepository: IUserRepository = getCustomRepository(UserRepository);
+      const userRepository = getCustomRepository(UserRepository);
 
       const user = await userRepository.findUserByEmail(email);
 
@@ -128,7 +124,7 @@ export class UserService implements IUserService {
 
   public async addFavoriteComic(data: CreateComicDto): Promise<HttpResponse> {
     try {
-      const comicRepository: IComicRepository = getCustomRepository(ComicRepository);
+      const comicRepository = getCustomRepository(ComicRepository);
 
       const res = await comicRepository.createComic(data);
 
@@ -140,9 +136,9 @@ export class UserService implements IUserService {
 
   public async getFavoriteComic(userId: string): Promise<HttpResponse> {
     try {
-      const comicRepository: IComicRepository = getCustomRepository(ComicRepository);
+      const comicRepository = getCustomRepository(ComicRepository);
 
-      const comicsFavorites = await comicRepository.findComicById(userId);
+      const comicsFavorites = await comicRepository.find({ where: { userId } });
 
       const comics = comicsFavorites;
 
@@ -154,7 +150,7 @@ export class UserService implements IUserService {
 
   public async removeFavoriteComic(comicId: string, userId: string): Promise<HttpResponse> {
     try {
-      const comicRepository: IComicRepository = getCustomRepository(ComicRepository);
+      const comicRepository = getCustomRepository(ComicRepository);
 
       await comicRepository.deleteComic(comicId, userId);
 
@@ -166,7 +162,7 @@ export class UserService implements IUserService {
 
   public async addFavoriteCharacter(data: CreateCharacterDto): Promise<HttpResponse> {
     try {
-      const characterRepository: ICharacterRepository = getCustomRepository(CharacterRepository);
+      const characterRepository = getCustomRepository(CharacterRepository);
 
       const res = await characterRepository.createCharacter(data);
 
@@ -178,9 +174,9 @@ export class UserService implements IUserService {
 
   public async getFavoriteCharacter(userId: string): Promise<HttpResponse> {
     try {
-      const characterRepository: ICharacterRepository = getCustomRepository(CharacterRepository);
+      const characterRepository = getCustomRepository(CharacterRepository);
 
-      const charactersFavorites = await characterRepository.findCharacterById(userId);
+      const charactersFavorites = await characterRepository.find({ where: { userId } });
 
       const characters = charactersFavorites;
 
