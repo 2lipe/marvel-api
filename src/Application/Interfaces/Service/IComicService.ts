@@ -1,4 +1,4 @@
-import { HttpResponse } from 'src/Api/Helpers/http-error-helpers';
+import { HttpResponse } from '../../../Api/Helpers/http-error-helpers';
 
 export interface IComicService {
   getComics(userId: string, search: string): Promise<HttpResponse>;

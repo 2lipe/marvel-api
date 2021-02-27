@@ -1,6 +1,6 @@
 import { DeleteResult } from 'typeorm';
 
-import { CreateCharacterDto } from 'src/Application/Dtos/CreateCharacterDto';
+import { CreateCharacterDto } from '../../Application/Dtos/CreateCharacterDto';
 import { CharacterEntity } from '../Entities/CharacterEntity';
 
 export interface ICharacterRepository {

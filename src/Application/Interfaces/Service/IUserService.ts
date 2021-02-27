@@ -1,9 +1,9 @@
-import { CreateUserDto } from 'src/Application/Dtos/CreateUserDto';
-import { UpdateUserDto } from 'src/Application/Dtos/UpdateUserDto';
-import { CreateComicDto } from 'src/Application/Dtos/CreateComicDto';
-import { CreateCharacterDto } from 'src/Application/Dtos/CreateCharacterDto';
+import { CreateUserDto } from '../../../Application/Dtos/CreateUserDto';
+import { UpdateUserDto } from '../../../Application/Dtos/UpdateUserDto';
+import { CreateComicDto } from '../../../Application/Dtos/CreateComicDto';
+import { CreateCharacterDto } from '../../../Application/Dtos/CreateCharacterDto';
 
-import { HttpResponse } from 'src/Api/Helpers/http-error-helpers';
+import { HttpResponse } from '../../../Api/Helpers/http-error-helpers';
 
 export interface IUserService {
   create(data: CreateUserDto): Promise<HttpResponse>;

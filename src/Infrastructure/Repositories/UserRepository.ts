@@ -1,9 +1,9 @@
 import { EntityRepository, Repository, UpdateResult } from 'typeorm';
 
-import { CreateUserDto } from 'src/Application/Dtos/CreateUserDto';
-import { UpdateUserDto } from 'src/Application/Dtos/UpdateUserDto';
-import { UserEntity } from 'src/Domain/Entities/UserEntity';
-import { IUserRepository } from 'src/Domain/IRepositories/IUserRepository';
+import { CreateUserDto } from '../../Application/Dtos/CreateUserDto';
+import { UpdateUserDto } from '../../Application/Dtos/UpdateUserDto';
+import { UserEntity } from '../../Domain/Entities/UserEntity';
+import { IUserRepository } from '../../Domain/IRepositories/IUserRepository';
 
 @EntityRepository(UserEntity)
 export class UserRepository extends Repository<UserEntity> implements IUserRepository {

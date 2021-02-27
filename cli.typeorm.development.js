@@ -9,6 +9,7 @@ const database = envConfig.databaseName;
 const url = `postgres://${username}:${password}@${host}:${port}/${database}`;
 
 module.exports = {
+  name: 'default',
   type: 'postgres',
   url: url,
   entities: ['./src/Domain/Entities/*.ts'],

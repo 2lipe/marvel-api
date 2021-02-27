@@ -1,24 +1,24 @@
 import { getCustomRepository } from 'typeorm';
 import { compare, hash } from 'bcryptjs';
 
-import { emailError, genericError, HttpResponse, ok, userNotExistError } from 'src/Api/Helpers/http-error-helpers';
-import { UserRepository } from 'src/Infrastructure/Repositories/UserRepository';
-import { IUserRepository } from 'src/Domain/IRepositories/IUserRepository';
-import { USER_MESSAGES } from 'src/Api/Helpers/messages-helpers';
+import { emailError, genericError, HttpResponse, ok, userNotExistError } from '../../Api/Helpers/http-error-helpers';
+import { UserRepository } from '../../Infrastructure/Repositories/UserRepository';
+import { IUserRepository } from '../../Domain/IRepositories/IUserRepository';
+import { USER_MESSAGES } from '../../Api/Helpers/messages-helpers';
 
 import { CreateCharacterDto } from '../Dtos/CreateCharacterDto';
 import { CreateComicDto } from '../Dtos/CreateComicDto';
 import { CreateUserDto } from '../Dtos/CreateUserDto';
 import { UpdateUserDto } from '../Dtos/UpdateUserDto';
 import { IUserService } from '../Interfaces/Service/IUserService';
-import { generateJwtToken } from 'src/Api/Helpers/jwt-helper';
+import { generateJwtToken } from '../../Api/Helpers/jwt-helper';
 
 export class UserService implements IUserService {
-  private _userRepository: IUserRepository = getCustomRepository(UserRepository);
-
   public async create(data: CreateUserDto): Promise<HttpResponse> {
     try {
-      const checkUserExists = await this._userRepository.findUserByEmail(data.email);
+      const userRepository: IUserRepository = getCustomRepository(UserRepository);
+
+      const checkUserExists = await userRepository.findUserByEmail(data.email);
 
       const userExists = checkUserExists !== undefined;
       if (userExists) emailError();
@@ -26,7 +26,7 @@ export class UserService implements IUserService {
       const salt = 8;
       const hashedPassword = await hash(data.password, salt);
 
-      const user = await this._userRepository.createUser({
+      const user = await userRepository.createUser({
         email: data.email,
         name: data.name,
         password: hashedPassword,
@@ -42,19 +42,21 @@ export class UserService implements IUserService {
 
   public async update(data: UpdateUserDto): Promise<HttpResponse> {
     try {
-      const user = await this._userRepository.findUserById(data.id);
+      const userRepository: IUserRepository = getCustomRepository(UserRepository);
+
+      const user = await userRepository.findUserById(data.id);
 
       const userIsNotUdefined = user !== undefined;
       const userNotFound = !userIsNotUdefined;
 
       if (userNotFound) userNotExistError();
 
-      const userWithUpdatedEmail = await this._userRepository.findUserByEmail(data.email);
+      const userWithUpdatedEmail = await userRepository.findUserByEmail(data.email);
       const emailIsUsed = userWithUpdatedEmail && userWithUpdatedEmail.id !== data.id;
 
       if (emailIsUsed) emailError();
 
-      await this._userRepository.updateUser({
+      await userRepository.updateUser({
         email: data.email,
         name: data.name,
         id: data.id,
@@ -75,7 +77,7 @@ export class UserService implements IUserService {
         const salt = 8;
         const newPassword = await hash(data.password, salt);
 
-        await this._userRepository.updateUser({
+        await userRepository.updateUser({
           email: data.email,
           name: data.name,
           id: data.id,
@@ -92,7 +94,9 @@ export class UserService implements IUserService {
 
   public async session(email: string, password: string): Promise<HttpResponse> {
     try {
-      const user = await this._userRepository.findUserByEmail(email);
+      const userRepository: IUserRepository = getCustomRepository(UserRepository);
+
+      const user = await userRepository.findUserByEmail(email);
 
       const userUndefined = user === undefined;
       if (userUndefined) userNotExistError();

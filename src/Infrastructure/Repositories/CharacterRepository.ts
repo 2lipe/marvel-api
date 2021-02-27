@@ -1,8 +1,8 @@
 import { DeleteResult, EntityRepository, Repository } from 'typeorm';
 
-import { CharacterEntity } from 'src/Domain/Entities/CharacterEntity';
-import { ICharacterRepository } from 'src/Domain/IRepositories/ICharacterRepository';
-import { CreateCharacterDto } from 'src/Application/Dtos/CreateCharacterDto';
+import { CharacterEntity } from '../../Domain/Entities/CharacterEntity';
+import { ICharacterRepository } from '../../Domain/IRepositories/ICharacterRepository';
+import { CreateCharacterDto } from '../../Application/Dtos/CreateCharacterDto';
 
 @EntityRepository(CharacterEntity)
 export class CharacterRepository extends Repository<CharacterEntity> implements ICharacterRepository {

@@ -13,4 +13,15 @@ export const envConfig = {
   connectionPort: process.env.SERVER_PORT,
 
   jwtKey: process.env.JWT_KEY,
+
+  // databaseName: 'stoneDEV',
+  // databaseType: 'postgres',
+  // databaseHost: 'localhost',
+  // databasePort: 5432,
+  // databaseUsername: 'postgres',
+  // databasePassword: 'reallyStrongPwd123',
+
+  // connectionPort: 5000,
+
+  // jwtKey: 'b79a28f31aa7d9468a130ca09146a1d6',
 };

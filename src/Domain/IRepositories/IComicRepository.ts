@@ -1,6 +1,6 @@
 import { DeleteResult } from 'typeorm';
 
-import { CreateComicDto } from 'src/Application/Dtos/CreateComicDto';
+import { CreateComicDto } from '../../Application/Dtos/CreateComicDto';
 import { ComicEntity } from '../Entities/ComicEntity';
 
 export interface IComicRepository {

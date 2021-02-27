@@ -1,18 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { responseTreated } from 'src/Api/Helpers/http-error-helpers';
-import { IUserService } from 'src/Application/Interfaces/Service/IUserService';
-import { UserService } from 'src/Application/Services/UserService';
-import { createUserSchema, sessionUserSchema, updateUserSchema } from 'src/Application/Schema/UserSchema';
+import { responseTreated } from '../../../Api/Helpers/http-error-helpers';
+import { IUserService } from '../../../Application/Interfaces/Service/IUserService';
+import { UserService } from '../../../Application/Services/UserService';
+import { createUserSchema, sessionUserSchema, updateUserSchema } from '../../../Application/Schema/UserSchema';
 
 export class UserController {
-  private _userService: IUserService = new UserService();
-
   async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await createUserSchema.validateAsync(req.body);
 
-      const result = await this._userService.create(req.body);
+      const userService: IUserService = new UserService();
+
+      const result = await userService.create(req.body);
 
       responseTreated(result, res);
     } catch (err) {
@@ -24,7 +24,9 @@ export class UserController {
     try {
       await updateUserSchema.validateAsync(req.body);
 
-      const result = await this._userService.update(req.body);
+      const userService: IUserService = new UserService();
+
+      const result = await userService.update(req.body);
 
       responseTreated(result, res);
     } catch (err) {
@@ -36,9 +38,11 @@ export class UserController {
     try {
       await sessionUserSchema.validateAsync(req.body);
 
+      const userService: IUserService = new UserService();
+
       const { email, password } = req.body;
 
-      const result = await this._userService.session(email, password);
+      const result = await userService.session(email, password);
 
       responseTreated(result, res);
     } catch (err) {
