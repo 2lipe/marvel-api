@@ -23,10 +23,10 @@ export class ComicController {
 
   async getComicCharacters(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
+      await ComicSchemas.getComicCharacters.validateAsync(req.body);
+
       const { comicId } = req.params;
       const { userId } = req.body;
-
-      await ComicSchemas.getComicCharacters.validateAsync(req.body);
 
       const comicService = new ComicService();
 
