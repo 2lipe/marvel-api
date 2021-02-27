@@ -5,7 +5,7 @@ import { CreateComicDto } from '../Dtos/CreateComicDto';
 import { CreateUserDto } from '../Dtos/CreateUserDto';
 import { UpdateUserDto } from '../Dtos/UpdateUserDto';
 
-export const Schemas = {
+export const UserSchemas = {
   userSchemas: {
     userIdScheme: Joi.object<Pick<UpdateUserDto, 'id'>>({
       id: Joi.string().required(),
