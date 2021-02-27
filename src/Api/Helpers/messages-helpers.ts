@@ -17,10 +17,21 @@ export const COMIC_MESSAGES = {
   addFailure: 'Failure with add comic',
 
   getSuccess: 'Get favorites with success',
-  getFailure: 'Cannot get favorites commics',
+  getFailure: 'Cannot get favorites comics',
 
   removeSuccess: 'Remove comic from favorites with success',
-  removeFailure: 'Fail to remove comic from favorites',
+  removeFailure: 'Failure to remove comic from favorites',
+} as const;
+
+export const CHARACTER_MESSAGES = {
+  addSucess: 'Character add with success',
+  addFailure: 'Failure with add character',
+
+  getSucess: 'Get character with success',
+  getFailure: 'Cannot get favorites comics',
+
+  removeSuccess: 'Remove character from favorites with success',
+  removeFailure: 'Failure to remove character from favorites',
 } as const;
 
 export const TOKEN_MESSAGES = {

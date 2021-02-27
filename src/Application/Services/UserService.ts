@@ -4,7 +4,7 @@ import { compare, hash } from 'bcryptjs';
 import { emailError, genericError, HttpResponse, ok, userNotExistError } from '../../Api/Helpers/http-error-helpers';
 import { UserRepository } from '../../Infrastructure/Repositories/UserRepository';
 import { IUserRepository } from '../../Domain/IRepositories/IUserRepository';
-import { COMIC_MESSAGES, USER_MESSAGES } from '../../Api/Helpers/messages-helpers';
+import { CHARACTER_MESSAGES, COMIC_MESSAGES, USER_MESSAGES } from '../../Api/Helpers/messages-helpers';
 
 import { CreateCharacterDto } from '../Dtos/CreateCharacterDto';
 import { CreateComicDto } from '../Dtos/CreateComicDto';
@@ -14,6 +14,8 @@ import { IUserService } from '../Interfaces/Service/IUserService';
 import { generateJwtToken } from '../../Api/Helpers/jwt-helper';
 import { ComicRepository } from '../../Infrastructure/Repositories/ComicRepository';
 import { IComicRepository } from '../../Domain/IRepositories/IComicRepository';
+import { CharacterRepository } from '../../Infrastructure/Repositories/CharacterRepository';
+import { ICharacterRepository } from '../../Domain/IRepositories/ICharacterRepository';
 
 export class UserService implements IUserService {
   public async create(data: CreateUserDto): Promise<HttpResponse> {
@@ -162,15 +164,41 @@ export class UserService implements IUserService {
     }
   }
 
-  addFavoriteCharacter(data: CreateCharacterDto): Promise<HttpResponse> {
-    throw new Error('Method not implemented.');
+  public async addFavoriteCharacter(data: CreateCharacterDto): Promise<HttpResponse> {
+    try {
+      const characterRepository: ICharacterRepository = getCustomRepository(CharacterRepository);
+
+      const res = await characterRepository.createCharacter(data);
+
+      return ok(res, CHARACTER_MESSAGES.addSucess);
+    } catch (err) {
+      return genericError({}, 500, CHARACTER_MESSAGES.addFailure);
+    }
   }
 
-  getFavoriteCharacter(userId: string): Promise<HttpResponse> {
-    throw new Error('Method not implemented.');
+  public async getFavoriteCharacter(userId: string): Promise<HttpResponse> {
+    try {
+      const characterRepository: ICharacterRepository = getCustomRepository(CharacterRepository);
+
+      const charactersFavorites = await characterRepository.findCharacterById(userId);
+
+      const characters = charactersFavorites;
+
+      return ok(characters, CHARACTER_MESSAGES.getSucess);
+    } catch (err) {
+      return genericError({}, 500, CHARACTER_MESSAGES.getFailure);
+    }
   }
 
-  removeFavoriteCharacter(characterId: string, userId: string): Promise<HttpResponse> {
-    throw new Error('Method not implemented.');
+  public async removeFavoriteCharacter(characterId: string, userId: string): Promise<HttpResponse> {
+    try {
+      const characterRepository = getCustomRepository(CharacterRepository);
+
+      await characterRepository.deleteCharacter(characterId, userId);
+
+      return ok({}, CHARACTER_MESSAGES.removeSuccess);
+    } catch (err) {
+      return genericError({}, 500, CHARACTER_MESSAGES.removeFailure);
+    }
   }
 }
