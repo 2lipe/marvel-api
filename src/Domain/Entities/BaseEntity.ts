@@ -1,6 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity('BaseEntity')
 export abstract class BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

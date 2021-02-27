@@ -1,6 +1,6 @@
 import { Server } from './server';
 
-import { envConfig } from './Helpers/env-configs';
+import { envConfig } from './Configs/env-configs';
 import { serverError } from './Helpers/http-error-helpers';
 
 (async (): Promise<void> => {

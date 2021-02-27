@@ -1,4 +1,4 @@
-const { envConfig } = require('./src/shared/helpers/env-configs');
+const { envConfig } = require('./src/Api/Configs/env-configs');
 
 module.exports = [
   {
@@ -9,11 +9,13 @@ module.exports = [
     username: envConfig.databaseUsername,
     password: envConfig.databasePassword,
     database: envConfig.databaseName,
-    entities: ['./src/domain/entities/*.ts'],
-    migrations: ['../src/infrastructure/database/migrations/*.ts'],
+    autoLoadEntities: true,
+    synchronize: true,
+    entities: ['./src/Domain/Entities/*.ts'],
+    migrations: ['../src/Infrastructure/Database/Migrations/*.ts'],
     cli: {
-      entitiesDir: './src/domain/entities/',
-      migrationsDir: './src/infrastructure/database/migrations/',
+      entitiesDir: './src/Domain/Entities/',
+      migrationsDir: './src/Infrastructure/Database/Migrations/',
     },
   },
 ];

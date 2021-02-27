@@ -4,9 +4,12 @@ import express, { Application, Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
-import { DatabaseConnection } from './Infrastructure/Database';
-import { serverError } from './Helpers/http-error-helpers';
-import { envConfig } from './Helpers/env-configs';
+import { DatabaseConnection } from '../Infrastructure/Database';
+import { serverError } from '../Api/Helpers/http-error-helpers';
+import { envConfig } from '../Api/Configs/env-configs';
+import { routes } from './Routes';
+import { authMiddleware } from './Middlewares/AuthMiddleware';
+import { unless } from './Configs/path-configs';
 
 export class Server {
   protected _port: string;
@@ -21,6 +24,7 @@ export class Server {
     await this.getConnectionDatabase();
 
     this.middlewares();
+    this.routes();
   }
 
   private async getConnectionDatabase() {
@@ -38,15 +42,16 @@ export class Server {
     this._server.use(helmet());
     this._server.use(express.urlencoded({ extended: true }));
     this._server.use(express.json());
+    this._server.use(authMiddleware.unless(unless));
+  }
+
+  private routes() {
+    this._server.use('/api', routes);
   }
 
   public start(): void {
     this._server.listen(envConfig.connectionPort || this._port, () => {
-      console.info(
-        `This server is listening on http://localhost:${
-          envConfig.connectionPort || this._port
-        }`,
-      );
+      console.info(`This server is listening on http://localhost:${envConfig.connectionPort || this._port}`);
     });
   }
 

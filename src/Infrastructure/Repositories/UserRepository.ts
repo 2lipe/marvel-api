@@ -1,8 +1,9 @@
-import { CreateUserDto } from 'src/Application/Dtos/CreateUserDto';
-import { UpdateUserDto } from 'src/Application/Dtos/UpdateUserDto';
-import { UserEntity } from 'src/Domain/Entities/UserEntity';
-import { IUserRepository } from 'src/Domain/IRepositories/IUserRepository';
 import { EntityRepository, Repository, UpdateResult } from 'typeorm';
+
+import { CreateUserDto } from '../../Application/Dtos/CreateUserDto';
+import { UpdateUserDto } from '../../Application/Dtos/UpdateUserDto';
+import { UserEntity } from '../../Domain/Entities/UserEntity';
+import { IUserRepository } from '../../Domain/IRepositories/IUserRepository';
 
 @EntityRepository(UserEntity)
 export class UserRepository extends Repository<UserEntity> implements IUserRepository {
@@ -16,7 +17,7 @@ export class UserRepository extends Repository<UserEntity> implements IUserRepos
     return user;
   }
 
-  updateUser(data: Omit<UpdateUserDto, 'oldPassword'>): Promise<UpdateResult> {
+  public async updateUser(data: Omit<UpdateUserDto, 'oldPassword'>): Promise<UpdateResult> {
     const { id, email, name, password } = data;
 
     const res = this.update({ id: id }, { email, name, password });
