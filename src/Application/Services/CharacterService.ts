@@ -34,7 +34,7 @@ export class CharacterService implements ICharacterService {
     }
   }
 
-  public async getComicsCharacter(characterId: string, userId: string): Promise<HttpResponse> {
+  public async getCharacterComics(characterId: string, userId: string): Promise<HttpResponse> {
     try {
       const comicRepository = getCustomRepository(ComicRepository);
 

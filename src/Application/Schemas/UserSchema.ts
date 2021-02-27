@@ -1,23 +1,18 @@
 import Joi from 'joi';
 
-import { CreateCharacterDto } from '../Dtos/CreateCharacterDto';
-import { CreateComicDto } from '../Dtos/CreateComicDto';
-import { CreateUserDto } from '../Dtos/CreateUserDto';
-import { UpdateUserDto } from '../Dtos/UpdateUserDto';
-
-export const Schemas = {
+export const UserSchemas = {
   userSchemas: {
-    userIdScheme: Joi.object<Pick<UpdateUserDto, 'id'>>({
+    userIdScheme: Joi.object({
       id: Joi.string().required(),
     }),
 
-    createUserSchema: Joi.object<CreateUserDto>({
+    createUserSchema: Joi.object({
       name: Joi.string().required(),
       email: Joi.string().required(),
       password: Joi.string().required(),
     }),
 
-    updateUserSchema: Joi.object<UpdateUserDto>({
+    updateUserSchema: Joi.object({
       id: Joi.string().required(),
       name: Joi.string().required(),
       email: Joi.string().required(),
@@ -25,14 +20,14 @@ export const Schemas = {
       oldPassword: Joi.string().allow(''),
     }),
 
-    sessionUserSchema: Joi.object<Pick<CreateUserDto, 'email' | 'password'>>({
+    sessionUserSchema: Joi.object({
       email: Joi.string().required(),
       password: Joi.string().required(),
     }),
   },
 
   characterSchemas: {
-    addCharacterScheme: Joi.object<CreateCharacterDto>({
+    addCharacterScheme: Joi.object({
       name: Joi.string().required(),
       characterId: Joi.string().required(),
       description: Joi.string().required(),
@@ -41,14 +36,14 @@ export const Schemas = {
       userId: Joi.string().required(),
     }),
 
-    removeCharacterScheme: Joi.object<Pick<CreateCharacterDto, 'userId' | 'characterId'>>({
+    removeCharacterScheme: Joi.object({
       userId: Joi.string().required(),
       characterId: Joi.string().required(),
     }),
   },
 
   comicSchemas: {
-    addComicScheme: Joi.object<CreateComicDto>({
+    addComicScheme: Joi.object({
       title: Joi.string().required(),
       comicId: Joi.string().required(),
       description: Joi.string().required(),
@@ -57,7 +52,7 @@ export const Schemas = {
       userId: Joi.string().required(),
     }),
 
-    removeComicScheme: Joi.object<Pick<CreateComicDto, 'userId' | 'comicId'>>({
+    removeComicScheme: Joi.object({
       userId: Joi.string().required(),
       comicId: Joi.string().required(),
     }),

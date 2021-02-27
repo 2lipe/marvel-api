@@ -1,44 +1,43 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { responseTreated } from '../../../Api/Helpers/http-error-helpers';
-import { IUserService } from '../../../Application/Interfaces/Service/IUserService';
+import { joiResponseError, responseTreated } from '../../../Api/Helpers/http-error-helpers';
 import { UserService } from '../../../Application/Services/UserService';
-import { Schemas } from '../../../Application/Schemas/UserSchema';
+import { UserSchemas } from '../../../Application/Schemas/UserSchema';
 
 export class UserController {
   async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      await Schemas.userSchemas.createUserSchema.validateAsync(req.body);
+      await UserSchemas.userSchemas.createUserSchema.validateAsync(req.body);
 
-      const userService: IUserService = new UserService();
+      const userService = new UserService();
 
       const result = await userService.create(req.body);
 
       responseTreated(result, res);
     } catch (err) {
-      err.isJoi === true ? res.status(422).json(err) : next(err);
+      joiResponseError(err, res, next);
     }
   }
 
   async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      await Schemas.userSchemas.updateUserSchema.validateAsync(req.body);
+      await UserSchemas.userSchemas.updateUserSchema.validateAsync(req.body);
 
-      const userService: IUserService = new UserService();
+      const userService = new UserService();
 
       const result = await userService.update(req.body);
 
       responseTreated(result, res);
     } catch (err) {
-      err.isJoi === true ? res.status(422).json(err) : next(err);
+      joiResponseError(err, res, next);
     }
   }
 
   async session(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      await Schemas.userSchemas.sessionUserSchema.validateAsync(req.body);
+      await UserSchemas.userSchemas.sessionUserSchema.validateAsync(req.body);
 
-      const userService: IUserService = new UserService();
+      const userService = new UserService();
 
       const { email, password } = req.body;
 
@@ -46,7 +45,7 @@ export class UserController {
 
       responseTreated(result, res);
     } catch (err) {
-      err.isJoi === true ? res.status(422).json(err) : next(err);
+      joiResponseError(err, res, next);
     }
   }
 }

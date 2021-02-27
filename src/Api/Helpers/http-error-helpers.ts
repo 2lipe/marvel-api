@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { NextFunction, Response } from 'express';
 
 export type HttpResponse = {
   success: boolean;
@@ -18,7 +18,7 @@ export const serverError = (error: Error): HttpResponse => ({
   success: false,
   statusCode: 500,
   body: {},
-  message: `Server Error: ${error.message} `,
+  message: `Server Error: ${error.message}`,
 });
 
 export const ok = (data: unknown, message: string): HttpResponse => ({
@@ -28,11 +28,7 @@ export const ok = (data: unknown, message: string): HttpResponse => ({
   message: message,
 });
 
-export const genericError = (
-  data: unknown,
-  statusCode: number,
-  message: string,
-): HttpResponse => ({
+export const genericError = (data: unknown, statusCode: number, message: string): HttpResponse => ({
   success: false,
   statusCode: statusCode,
   body: data,
@@ -53,11 +49,14 @@ export const emailError = (): HttpResponse => ({
   message: 'Email In Use Error',
 });
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const responseTreated = (response: HttpResponse, res: Response) => {
   return res.status(response.statusCode).json({
     data: response.body,
     message: response.message,
     success: response.success,
   });
+};
+
+export const joiResponseError = (err: any, res: Response, next: NextFunction) => {
+  return err.isJoi === true ? res.status(422).json(err) : next(err);
 };
