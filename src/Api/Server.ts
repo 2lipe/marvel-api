@@ -6,10 +6,12 @@ import helmet from 'helmet';
 
 import { Routes } from './Routes/Routes';
 import { DatabaseConnection } from '../Infrastructure/Database';
-import { serverError } from '../Api/Helpers/http-error-helpers';
-import { envConfigs } from '../Api/Configs/env-configs';
-import { authMiddleware } from './Middlewares/AuthMiddleware';
+import { serverError } from './Helpers/http-error-helpers';
+import { envConfigs } from './Configs/env-configs';
 import { pathConfigs } from './Configs/path-configs';
+import { authMiddleware } from './Middlewares/AuthMiddleware';
+import { rateLimiter } from './Middlewares/RateLimitMiddleware';
+import { DATABASE_MESSAGES } from './Helpers/messages-helpers';
 
 export class Server {
   protected _port: string;
@@ -31,7 +33,7 @@ export class Server {
     try {
       await DatabaseConnection();
 
-      console.info('Success database connection!');
+      console.info(DATABASE_MESSAGES.successConnect);
     } catch (error) {
       serverError(error);
     }
@@ -43,6 +45,7 @@ export class Server {
     this._server.use(express.urlencoded({ extended: true }));
     this._server.use(express.json());
     this._server.use(authMiddleware.unless(pathConfigs.unless));
+    this._server.use(rateLimiter);
   }
 
   private routes() {

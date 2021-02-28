@@ -1,20 +1,28 @@
 import { getConnection } from 'typeorm';
 import supertest from 'supertest';
 
-import { Server } from '../Api/server';
+import { Server } from '../Api/Server';
 
 beforeAll(async () => {
-  const server = new Server('5000');
+  try {
+    const server = new Server('3000');
 
-  await server.init();
+    await server.init();
 
-  global.testRequest = supertest(server.getServer());
+    global.testRequest = supertest(server.getServer());
+  } catch (err) {
+    throw new Error(err);
+  }
 });
 
 afterAll(async () => {
-  const connection = getConnection();
+  try {
+    const connection = getConnection();
 
-  await connection.dropDatabase();
+    await connection.dropDatabase();
 
-  await connection.close();
+    await connection.close();
+  } catch (err) {
+    throw new Error(err);
+  }
 });

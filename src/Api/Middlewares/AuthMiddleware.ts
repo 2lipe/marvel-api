@@ -27,8 +27,8 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
     const response = unauthorized(TOKEN_MESSAGES.invalidToken);
 
     return responseTreated(response, res);
-  } catch (e) {
-    return next(e);
+  } catch (err) {
+    return next(err);
   }
 }
 
