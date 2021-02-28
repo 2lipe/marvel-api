@@ -10,7 +10,7 @@ const hash = envConfigs.apiMarvelHash;
 
 export async function getMarvelApi<T>(route: string): Promise<T> {
   try {
-    const url = `${marvelUrl}/${route}?ts=${ts}&apiKey=${key}&hash=${hash}`;
+    const url = `${marvelUrl}/${route}?ts=${ts}&apikey=${key}&hash=${hash}`;
 
     const res = await fetch(url, fetchConfigs.getOptions);
 
@@ -24,7 +24,7 @@ export async function getMarvelApi<T>(route: string): Promise<T> {
 
 export async function getMarvelApiBySearchParameter<T>(route: string, searchParameter: string): Promise<T> {
   try {
-    const url = `${marvelUrl}/${route}?ts=${ts}&apiKey=${key}&hash=${hash}&${searchParameter}`;
+    const url = `${marvelUrl}/${route}?ts=${ts}&apikey=${key}&hash=${hash}&${searchParameter}`;
 
     const res = await fetch(url, fetchConfigs.getOptions);
 

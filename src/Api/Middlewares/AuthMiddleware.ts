@@ -20,7 +20,9 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
     const userId = await decodeJwtToken(token);
 
     const userIdIsNotNull = userId !== null;
-    if (userIdIsNotNull) next();
+    if (userIdIsNotNull) {
+      return next();
+    }
 
     const response = unauthorized(TOKEN_MESSAGES.invalidToken);
 
