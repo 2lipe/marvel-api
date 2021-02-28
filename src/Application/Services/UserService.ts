@@ -3,7 +3,6 @@ import { compare, hash } from 'bcryptjs';
 
 import { emailError, genericError, HttpResponse, ok, userNotExistError } from '../../Api/Helpers/http-error-helpers';
 import { UserRepository } from '../../Infrastructure/Repositories/UserRepository';
-import { IUserRepository } from '../../Domain/IRepositories/IUserRepository';
 import { CHARACTER_MESSAGES, COMIC_MESSAGES, USER_MESSAGES } from '../../Api/Helpers/messages-helpers';
 
 import { CreateCharacterDto } from '../Dtos/CreateCharacterDto';
@@ -18,12 +17,14 @@ import { CharacterRepository } from '../../Infrastructure/Repositories/Character
 export class UserService implements IUserService {
   public async create(data: CreateUserDto): Promise<HttpResponse> {
     try {
-      const userRepository: IUserRepository = getCustomRepository(UserRepository);
+      const userRepository = getCustomRepository(UserRepository);
 
       const checkUserExists = await userRepository.findUserByEmail(data.email);
 
       const userExists = checkUserExists !== undefined;
-      if (userExists) emailError();
+      if (userExists) {
+        return emailError();
+      }
 
       const salt = 8;
       const hashedPassword = await hash(data.password, salt);
@@ -51,12 +52,16 @@ export class UserService implements IUserService {
       const userIsNotUdefined = user !== undefined;
       const userNotFound = !userIsNotUdefined;
 
-      if (userNotFound) userNotExistError();
+      if (userNotFound) {
+        return userNotExistError();
+      }
 
       const userWithUpdatedEmail = await userRepository.findUserByEmail(data.email);
       const emailIsUsed = userWithUpdatedEmail && userWithUpdatedEmail.id !== data.id;
 
-      if (emailIsUsed) emailError();
+      if (emailIsUsed) {
+        return emailError();
+      }
 
       await userRepository.updateUser({
         email: data.email,
@@ -66,14 +71,18 @@ export class UserService implements IUserService {
       });
 
       const oldPasswordIsNotPassed = data.password && !data.oldPassword;
-      if (oldPasswordIsNotPassed) genericError({}, 400, USER_MESSAGES.oldPasswordNotPass);
+      if (oldPasswordIsNotPassed) {
+        return genericError({}, 400, USER_MESSAGES.oldPasswordNotPass);
+      }
 
       const passwordIsPassed = data.password && data.oldPassword;
       if (passwordIsPassed) {
         const checkOldPassword = await compare(data.oldPassword, user!.password);
 
         const oldPasswordDontCheck = !checkOldPassword;
-        if (oldPasswordDontCheck) genericError({}, 400, USER_MESSAGES.invalidCredentials);
+        if (oldPasswordDontCheck) {
+          return genericError({}, 400, USER_MESSAGES.invalidCredentials);
+        }
 
         const salt = 8;
         const newPassword = await hash(data.password, salt);
@@ -99,12 +108,16 @@ export class UserService implements IUserService {
       const user = await userRepository.findUserByEmail(email);
 
       const userUndefined = user === undefined;
-      if (userUndefined) userNotExistError();
+      if (userUndefined) {
+        return userNotExistError();
+      }
 
       const comparePassword = await compare(password, user!.password);
 
       const passwordIncorrect = !comparePassword;
-      if (passwordIncorrect) genericError({}, 401, USER_MESSAGES.invalidCredentials);
+      if (passwordIncorrect) {
+        return genericError({}, 401, USER_MESSAGES.invalidCredentials);
+      }
 
       const userName = user?.name;
       const token = generateJwtToken(user!.id);
