@@ -10,7 +10,7 @@ export class UserRepository extends Repository<UserEntity> implements IUserRepos
   public async createUser(data: CreateUserDto): Promise<UserEntity> {
     const { password, name, email } = data;
 
-    const user = this.create({ name, email, password });
+    const user = this.create({ name: name, email: email, password: password });
 
     await this.save(user);
 
