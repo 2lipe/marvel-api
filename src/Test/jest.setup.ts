@@ -1,7 +1,7 @@
 import { getConnection } from 'typeorm';
 import supertest from 'supertest';
 
-import { Server } from '../Api/server';
+import { Server } from '../Api/Server';
 
 beforeAll(async () => {
   try {

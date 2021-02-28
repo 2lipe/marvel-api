@@ -14,6 +14,4 @@ export default {
   preset: 'ts-jest',
   setupFilesAfterEnv: ['<rootDir>/src/Test/jest.setup.ts'],
   testMatch: ['**/*.spec.ts'],
-  collectCoverageFrom: [`${root}/src/Infrastructure/Repositories/*.ts`],
-  coverageReporters: ['text-summary', 'lcov'],
 };

@@ -38,3 +38,11 @@ export const TOKEN_MESSAGES = {
   missingToken: 'Token is missing',
   invalidToken: 'Invalid token',
 } as const;
+
+export const SERVER_MESSAGES = {
+  manyRequests: 'Too many requests',
+};
+
+export const DATABASE_MESSAGES = {
+  successConnect: 'Success database connection!',
+};

@@ -1,4 +1,4 @@
-import { Server } from './server';
+import { Server } from './Server';
 
 import { envConfigs } from './Configs/env-configs';
 import { serverError } from './Helpers/http-error-helpers';
