@@ -8,21 +8,21 @@ import {
 
 describe('UserController', () => {
   it('SHOULD_BE_POST_TO_CREATE_USER', async () => {
-    const newUser = {
+    const user = {
       name: 'Alan Poe',
       email: 'Alan@mail.com',
       password: '1234',
     };
-    const response = await global.testRequest.post('/api/user/create').send(newUser);
+    const response = await global.testRequest.post('/api/user/create').send(user);
     expect(response.status).toBe(200);
   });
 
   it('SHOULD_BE_INIT_SESSION', async () => {
-    const newUser = {
+    const user = {
       email: 'Alan@mail.com',
       password: '1234',
     };
-    const response = await global.testRequest.post('/api/user/session').send(newUser);
+    const response = await global.testRequest.post('/api/user/session').send(user);
 
     expect(response.status).toBe(200);
   });
@@ -52,7 +52,7 @@ describe('UserController', () => {
   it('SHOULD_BE_POST_TO_ADD_FAVORITE_COMIC', async () => {
     const user = await createUserMock();
 
-    const favoriteComicUser = {
+    const favoriteComic = {
       comicId: '123456789',
       title: 'Call of Cthulhu',
       description: 'Call of Cthulhu',
@@ -67,7 +67,7 @@ describe('UserController', () => {
         'Authorization',
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDY1MzNlYy02NGU3LTQ1NGQtYTc1Mi1jNzFkZjAxNDBhMjMiLCJpYXQiOjE2MTQ0NzQ4NjZ9.4A3TpXP04XWCGzAoT1jphWHxJ4DvDuhyKjJdkqcVnc4',
       )
-      .send(favoriteComicUser);
+      .send(favoriteComic);
     expect(response.status).toBe(200);
   });
 
@@ -75,7 +75,7 @@ describe('UserController', () => {
     const user = await createFavoriteComicUserMock();
     createFavoriteComicMock();
 
-    const favoriteComicUser = {
+    const favoriteComic = {
       comicId: '12345789',
       userId: user.id,
     };
@@ -86,7 +86,7 @@ describe('UserController', () => {
         'Authorization',
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDY1MzNlYy02NGU3LTQ1NGQtYTc1Mi1jNzFkZjAxNDBhMjMiLCJpYXQiOjE2MTQ0NzQ4NjZ9.4A3TpXP04XWCGzAoT1jphWHxJ4DvDuhyKjJdkqcVnc4',
       )
-      .send(favoriteComicUser);
+      .send(favoriteComic);
     expect(response.status).toBe(200);
   });
 
@@ -109,7 +109,7 @@ describe('UserController', () => {
   it('SHOULD_BE_POST_TO_ADD_FAVORITE_CHARACTER', async () => {
     const user = await createUserMock();
 
-    const favoriteCharacterUser = {
+    const favoriteCharacte = {
       userId: user.id,
       characterId: '12345',
       name: 'Call of Cthulhu',
@@ -124,7 +124,7 @@ describe('UserController', () => {
         'Authorization',
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZmRlMzQ4Yi04MmZlLTQ1NjQtOTg3Zi00ZjM3MjhhZDcxOTkiLCJpYXQiOjE2MTQ0ODkzNjh9.cK2XriHjdvT8DM117xU50yUr4WfrQHNrpD2PNusgZeo',
       )
-      .send(favoriteCharacterUser);
+      .send(favoriteCharacte);
 
     expect(response.status).toBe(200);
   });
@@ -133,7 +133,7 @@ describe('UserController', () => {
     const user = await createFavoriteCharacterUserMock();
     createFavoriteComicUserMock();
 
-    const favoriteCharacterUser = {
+    const favoriteCharacter = {
       userId: user.id,
       characterId: '12345',
     };
@@ -144,7 +144,7 @@ describe('UserController', () => {
         'Authorization',
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDY1MzNlYy02NGU3LTQ1NGQtYTc1Mi1jNzFkZjAxNDBhMjMiLCJpYXQiOjE2MTQ0NzQ4NjZ9.4A3TpXP04XWCGzAoT1jphWHxJ4DvDuhyKjJdkqcVnc4',
       )
-      .send(favoriteCharacterUser);
+      .send(favoriteCharacter);
 
     expect(response.status).toBe(200);
   });
