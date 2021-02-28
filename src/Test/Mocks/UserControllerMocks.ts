@@ -1,33 +1,34 @@
 export const createUserMock = async () => {
-  const newUser = {
+  const user = {
     name: 'Alan Poe',
-    email: `Alan${Math.random()}@mail.com`,
+    email: `Alan${Math.random()}@gmail.com`,
     password: '1234',
   };
 
-  const response = await global.testRequest.post('/api/user/create').send(newUser);
+  const response = await global.testRequest.post('/api/user/create').send(user);
+
   return response.body.data;
 };
 
 export const createFavoriteComicUserMock = async () => {
-  const newUser = {
+  const user = {
     name: 'Alan Poe',
-    email: `Alan${Math.random()}@mail.com`,
+    email: `Alan${Math.random()}@gmail.com`,
     password: '1234',
   };
 
-  const response = await global.testRequest.post('/api/user/create').send(newUser);
+  const response = await global.testRequest.post('/api/user/create').send(user);
   return response.body.data;
 };
 
 export const createFavoriteComicMock = async () => {
   const user = await createFavoriteComicUserMock();
-  const favoriteComicUser = {
+  const favoriteComic = {
     characterId: '12345',
     name: 'Marvel',
     description: 'Marvel',
-    thumbnailUrl: 'http://teste.com',
-    detailUrl: 'http://teste.com',
+    thumbnailUrl: 'http://marvel.com',
+    detailUrl: 'http://marvel.com',
     userId: user.id,
   };
 
@@ -37,28 +38,28 @@ export const createFavoriteComicMock = async () => {
       'Authorization',
       'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZmRlMzQ4Yi04MmZlLTQ1NjQtOTg3Zi00ZjM3MjhhZDcxOTkiLCJpYXQiOjE2MTQ0ODkzNjh9.cK2XriHjdvT8DM117xU50yUr4WfrQHNrpD2PNusgZeo',
     )
-    .send(favoriteComicUser);
+    .send(favoriteComic);
   return response.body.data;
 };
 
 export const createFavoriteCharacterUserMock = async () => {
-  const newUser = {
+  const user = {
     name: 'Alan Poe',
-    email: `Alan${Math.random()}@mail.com`,
+    email: `Alan${Math.random()}@gmail.com`,
     password: '1234',
   };
-  const response = await global.testRequest.post('/api/user/create').send(newUser);
+  const response = await global.testRequest.post('/api/user/create').send(user);
   return response.body.data;
 };
 
 export const createFavoriteCharacterMock = async () => {
   const user = await createFavoriteCharacterUserMock();
-  const favoriteCharacterUser = {
+  const favoriteCharacter = {
     comicId: '12345789',
     title: 'Marvel',
     description: 'Marvel',
-    thumbnailUrl: 'http://teste.com',
-    detailUrl: 'http://teste.com',
+    thumbnailUrl: 'http://marvel.com',
+    detailUrl: 'http://marvel.com',
     userId: user.id,
   };
 
@@ -68,6 +69,6 @@ export const createFavoriteCharacterMock = async () => {
       'Authorization',
       'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZmRlMzQ4Yi04MmZlLTQ1NjQtOTg3Zi00ZjM3MjhhZDcxOTkiLCJpYXQiOjE2MTQ0ODkzNjh9.cK2XriHjdvT8DM117xU50yUr4WfrQHNrpD2PNusgZeo',
     )
-    .send(favoriteCharacterUser);
+    .send(favoriteCharacter);
   return response.body.data;
 };
