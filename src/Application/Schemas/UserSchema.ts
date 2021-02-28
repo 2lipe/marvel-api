@@ -3,7 +3,7 @@ import Joi from 'joi';
 export const UserSchemas = {
   userSchemas: {
     userIdScheme: Joi.object({
-      id: Joi.string().required(),
+      userId: Joi.string().required(),
     }),
 
     createUserSchema: Joi.object({
