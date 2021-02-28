@@ -18,7 +18,7 @@ const url = `postgres://${username}:${password}@${host}:${port}/${database}`;
 
 module.exports = [
   {
-    name: 'development',
+    name: 'default',
     type: type,
     host: host,
     port: port,
