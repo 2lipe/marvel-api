@@ -12,7 +12,6 @@ import { serverError } from './Helpers/http-error-helpers';
 import { envConfigs } from './Configs/env-configs';
 import { pathConfigs } from './Configs/path-configs';
 import { authMiddleware } from './Middlewares/AuthMiddleware';
-import { rateLimiter } from './Middlewares/RateLimitMiddleware';
 import { DATABASE_MESSAGES } from './Helpers/messages-helpers';
 
 export class Server {
@@ -48,7 +47,6 @@ export class Server {
     this._server.use(express.json());
     this._server.use(authMiddleware.unless(pathConfigs.unless));
     this._server.use('/swagger', swaggerUi.serve, swaggerUi.setup(swagger));
-    this._server.use(rateLimiter);
   }
 
   private routes() {
