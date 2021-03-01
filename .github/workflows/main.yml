@@ -54,7 +54,7 @@ jobs:
             cd ~/app/stone-marvel-api
             .node_modules/.bin/typeorm migration:run
             
-      - name: Run migrations on Digital Ocean
+      - name: Restarting server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
