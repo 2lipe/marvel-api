@@ -9,10 +9,10 @@ const username = process.env.DATABASE_USERNAME;
 const password = process.env.DATABASE_PASSWORD;
 const database = process.env.DATABASE_NAME;
 
-const entitiesPath = path.resolve(__dirname, 'dist', 'Domain', 'Entities', '*.js');
-const migrationsPath = path.resolve(__dirname, 'dist', 'Infrastructure', 'Database', 'Migrations', '*.js');
-const entitiesDir = path.resolve(__dirname, 'dist', 'Domain', 'Entities');
-const migrationsDir = path.resolve(__dirname, 'dist', 'Infrastructure', 'Database', 'Migrations');
+const entitiesPath = path.resolve(__dirname, 'src', 'Domain', 'Entities', '*.ts');
+const migrationsPath = path.resolve(__dirname, 'src', 'Infrastructure', 'Database', 'Migrations', '*.ts');
+const entitiesDir = path.resolve(__dirname, 'src', 'Domain', 'Entities');
+const migrationsDir = path.resolve(__dirname, 'src', 'Infrastructure', 'Database', 'Migrations');
 
 const url = `postgres://${username}:${password}@${host}:${port}/${database}`;
 
