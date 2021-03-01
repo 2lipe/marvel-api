@@ -17,7 +17,8 @@
     "typeorm:dev": "NODE_ENV=development ts-node ./node_modules/typeorm/cli.js --config ormconfig.js",
     "run-scheme:build": "yarn typeorm schema:sync",
     "run-scheme:development": "yarn typeorm:dev schema:sync",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "swagger-autogen": "node src/swagger.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -34,6 +35,8 @@
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5",
     "supertest": "^6.1.3",
+    "swagger-autogen": "^2.6.8",
+    "swagger-ui-express": "^4.1.6",
     "typeorm": "^0.2.31"
   },
   "devDependencies": {
@@ -55,6 +58,7 @@
     "@types/node-fetch": "^2.5.8",
     "@types/pg": "^7.14.10",
     "@types/supertest": "^2.0.10",
+    "@types/swagger-ui-express": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
     "babel-plugin-transform-typescript-metadata": "^0.3.1",

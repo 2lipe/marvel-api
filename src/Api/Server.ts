@@ -3,6 +3,8 @@ import 'reflect-metadata';
 import express, { Application, Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import swaggerUi from 'swagger-ui-express';
+import swagger from '../swagger_output.json';
 
 import { Routes } from './Routes/Routes';
 import { DatabaseConnection } from '../Infrastructure/Database';
@@ -46,6 +48,7 @@ export class Server {
     this._server.use(express.json());
     this._server.use(authMiddleware.unless(pathConfigs.unless));
     this._server.use(rateLimiter);
+    this._server.use('/swagger', swaggerUi.serve, swaggerUi.setup(swagger));
   }
 
   private routes() {
