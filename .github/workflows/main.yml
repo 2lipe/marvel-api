@@ -54,7 +54,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd ~/app/stone-marvel-api
-            .node_modules/.bin/typeorm migration:run
+            yarn run-scheme
             
       - name: Restarting server
         uses: appleboy/ssh-action@master
