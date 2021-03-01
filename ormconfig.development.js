@@ -14,8 +14,6 @@ const migrationsPath = path.resolve(__dirname, 'src', 'Infrastructure', 'Databas
 const entitiesDir = path.resolve(__dirname, 'src', 'Domain', 'Entities');
 const migrationsDir = path.resolve(__dirname, 'src', 'Infrastructure', 'Database', 'Migrations');
 
-const url = `postgres://${username}:${password}@${host}:${port}/${database}`;
-
 module.exports = [
   {
     name: 'default',

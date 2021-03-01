@@ -15,7 +15,8 @@
     "test:staged": "jest",
     "typeorm": "NODE_ENV=production ts-node ./node_modules/typeorm/cli.js --config ormconfig.js",
     "typeorm:dev": "NODE_ENV=development ts-node ./node_modules/typeorm/cli.js --config ormconfig.development.js",
-    "run-scheme": "yarn typeorm:dev schema:sync",
+    "run-scheme:build": "yarn typeorm schema:sync",
+    "run-scheme:development": "yarn typeorm:dev schema:sync",
     "postinstall": "husky install"
   },
   "dependencies": {
