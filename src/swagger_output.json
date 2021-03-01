@@ -5,7 +5,7 @@
     "title": "MARVEL API",
     "description": "Routes for marvel stone api"
   },
-  "host": "161.35.57.166",
+  "host": "http://161.35.57.166/api",
   "basePath": "/",
   "tags": [],
   "schemes": ["http"],

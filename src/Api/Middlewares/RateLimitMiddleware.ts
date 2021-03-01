@@ -15,7 +15,7 @@ const psqlClient = new Pool({
 const limiter = new RateLimiterPostgres({
   storeClient: psqlClient,
   keyPrefix: 'ratelimit',
-  points: 5,
+  points: 200,
   duration: 1,
 });
 

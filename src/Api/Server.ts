@@ -47,8 +47,8 @@ export class Server {
     this._server.use(express.urlencoded({ extended: true }));
     this._server.use(express.json());
     this._server.use(authMiddleware.unless(pathConfigs.unless));
-    this._server.use(rateLimiter);
     this._server.use('/swagger', swaggerUi.serve, swaggerUi.setup(swagger));
+    this._server.use(rateLimiter);
   }
 
   private routes() {
