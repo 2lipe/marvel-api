@@ -1,10 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { joiResponseError, responseTreated } from '../../../Api/Helpers/http-error-helpers';
+import { joiResponseError, ok, responseTreated } from '../../../Api/Helpers/http-error-helpers';
 import { UserService } from '../../../Application/Services/UserService';
 import { UserSchemas } from '../../../Application/Schemas/UserSchema';
 
 export class UserController {
+  async teste(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      ok({}, 'deu certo');
+    } catch (err) {
+      joiResponseError(err, res, next);
+    }
+  }
+
   async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       await UserSchemas.userSchemas.createUserSchema.validateAsync(req.body);
