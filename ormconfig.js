@@ -34,7 +34,6 @@ module.exports = [
   //   },
   // },
   {
-    name: 'default',
     type: type,
     url: url,
     logging: false,
