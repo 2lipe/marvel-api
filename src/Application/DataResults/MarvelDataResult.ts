@@ -16,7 +16,7 @@ export class MarvelDataResult {
     this.favorite = false;
 
     data.urls.forEach(item => {
-      if (item.type === 'variant') {
+      if (item.type === 'detail') {
         this.variantUri = item.url;
       }
     });
