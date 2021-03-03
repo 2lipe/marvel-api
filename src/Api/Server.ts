@@ -2,7 +2,6 @@ import 'reflect-metadata';
 
 import express, { Application, Express } from 'express';
 import cors from 'cors';
-import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
 import swagger from '../swagger_output.json';
 
@@ -10,7 +9,6 @@ import { Routes } from './Routes/Routes';
 import { DatabaseConnection } from '../Infrastructure/Database';
 import { serverError } from './Helpers/http-error-helpers';
 import { envConfigs } from './Configs/env-configs';
-import { pathConfigs } from './Configs/path-configs';
 import { authMiddleware } from './Middlewares/AuthMiddleware';
 import { DATABASE_MESSAGES } from './Helpers/messages-helpers';
 
@@ -46,7 +44,6 @@ export class Server {
     };
 
     this._server.use(cors());
-    this._server.use(helmet());
     this._server.use(express.urlencoded({ extended: true }));
     this._server.use(express.json());
     this._server.use(authMiddleware.unless(unless));
