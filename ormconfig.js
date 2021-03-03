@@ -34,6 +34,7 @@ module.exports = [
   //   },
   // },
   {
+    name: 'production',
     type: type,
     url: url,
     logging: false,
