@@ -20,22 +20,6 @@ module.exports = [
   {
     name: 'default',
     type: type,
-    host: host,
-    port: port,
-    username: username,
-    password: password,
-    database: database,
-    logging: false,
-    entities: [entitiesPath],
-    migrations: [migrationsPath],
-    cli: {
-      entitiesDir: entitiesDir,
-      migrationsDir: migrationsDir,
-    },
-  },
-  {
-    name: 'default',
-    type: type,
     url: url,
     logging: false,
     ssl: true,
@@ -51,6 +35,23 @@ module.exports = [
       migrationsDir: migrationsDir,
     },
   },
+  {
+    name: 'default',
+    type: type,
+    host: host,
+    port: port,
+    username: username,
+    password: password,
+    database: database,
+    logging: false,
+    entities: [entitiesPath],
+    migrations: [migrationsPath],
+    cli: {
+      entitiesDir: entitiesDir,
+      migrationsDir: migrationsDir,
+    },
+  },
+
   {
     name: 'test',
     type: 'sqlite',

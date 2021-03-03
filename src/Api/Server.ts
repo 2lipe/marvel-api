@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import express, { Application, Express } from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
 import swagger from '../swagger_output.json';
 
@@ -9,6 +10,7 @@ import { Routes } from './Routes/Routes';
 import { DatabaseConnection } from '../Infrastructure/Database';
 import { serverError } from './Helpers/http-error-helpers';
 import { envConfigs } from './Configs/env-configs';
+import { pathConfigs } from './Configs/path-configs';
 import { authMiddleware } from './Middlewares/AuthMiddleware';
 import { DATABASE_MESSAGES } from './Helpers/messages-helpers';
 
@@ -34,19 +36,17 @@ export class Server {
 
       console.info(DATABASE_MESSAGES.successConnect);
     } catch (error) {
+      console.log(error);
       serverError(error);
     }
   }
 
   private middlewares() {
-    const unless = {
-      path: [{ url: /^\/api\/user\/session|\/swagger|\/api\/user\/create|\/api\/user\/teste/ }],
-    };
-
     this._server.use(cors());
+    this._server.use(helmet());
     this._server.use(express.urlencoded({ extended: true }));
     this._server.use(express.json());
-    this._server.use(authMiddleware.unless(unless));
+    this._server.use(authMiddleware.unless(pathConfigs.unless));
     this._server.use('/swagger', swaggerUi.serve, swaggerUi.setup(swagger));
   }
 
@@ -55,7 +55,7 @@ export class Server {
   }
 
   public start(): void {
-    this._server.listen(envConfigs.connectionPort || this._port, () => {
+    this._server.listen(process.env.PORT || envConfigs.connectionPort || this._port, () => {
       console.info(`This server is listening on http://localhost:${envConfigs.connectionPort || this._port}`);
     });
   }

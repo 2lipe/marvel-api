@@ -7,6 +7,7 @@
   "license": "ISC",
   "scripts": {
     "build": "tsc",
+    "start": "node dist/Api/index.js",
     "babel:build": "babel src --extensions  \".js,.ts\" --out-dir dist --copy-files",
     "dev": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register src/Api/index.ts",
     "dev:server": "NODE_ENV=development ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/Api/index.ts",
