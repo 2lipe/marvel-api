@@ -4,7 +4,7 @@ export async function DatabaseConnection(): Promise<Connection> {
   try {
     const opt = await getConnectionOptions(process.env.NODE_ENV);
 
-    return createConnection({ ...opt, name: 'default' });
+    return createConnection({ ...opt, name: 'production' });
   } catch (err) {
     throw new Error(err);
   }
