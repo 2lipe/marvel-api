@@ -1,14 +1,10 @@
-<h1 align="center">
-    <img alt="Stone" src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Stone_pagamentos.png" width="200px" />
-</h1>
-
 <h3 align="center">
-  Stone Marvel Api
+  Marvel Api
 </h3>
 
 <br>
 
-<p align="center">Este desafio se propós a realizar a criação de uma API com o intuito de cosumir dados da API Mavel, realizar autenticação de usuário e disponibilizar dados de Comics e Characters para o usuário.</p>
+<p align="center">Este projeto se propós a realizar a criação de uma API com o intuito de cosumir dados da API Marvel, realizar autenticação de usuário e disponibilizar dados de Comics e Characters para o usuário. Api feita utilizando NodeJS com DDD patterns</p>
 
 # Documentação da API
 
@@ -40,7 +36,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
   </p>
 </div>
 
-Após clonar o repositório, entre na pasta `challenge-stone-client` e instale todas as dependências utilizando o comando:
+Após clonar o repositório, entre na pasta `marvel-api` e instale todas as dependências utilizando o comando:
 
 ```bash
 # Digite o comando abaixo para instalar as dependências:
@@ -53,7 +49,7 @@ npm install
 
 Irá precisar criar um container no Docker: <br> `docker run --name postgresql-container -p 5432:5432 -e POSTGRES_PASSWORD=somePassword -d postgres`.
 
-Criar um banco de dados - `stone`
+Criar um banco de dados - `marvelDEV`
 
 Após instalar as dependências e criar o banco no Docker, rode as migrations: `yarn run-scheme:dev` ou `npm run run-scheme:dev`.
 

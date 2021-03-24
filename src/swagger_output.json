@@ -3,9 +3,9 @@
   "info": {
     "version": "1.0.0",
     "title": "MARVEL API",
-    "description": "Routes for marvel stone api"
+    "description": "Routes for marvel api"
   },
-  "host": "http://161.35.57.166/api",
+  "host": "https://marvel-api-2lipe.herokuapp.com/api/",
   "basePath": "/",
   "tags": [],
   "schemes": ["http"],

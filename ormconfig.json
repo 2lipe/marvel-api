@@ -1,0 +1,15 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": "5432",
+  "username": "postgres",
+  "password": "reallyStrongPwd123",
+  "database": "marvelDEV",
+  "logging": false,
+  "entities": ["./src/Domain/Entities/*.ts"],
+  "migrations": ["./src/Infrastructure/Database/Migrations/*.ts"],
+  "cli": {
+    "entitiesDir": "./src/Domain/Entities",
+    "migrationsDir": "./src/Infrastructure/Database/Migrations"
+  }
+}
