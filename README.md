@@ -4,7 +4,7 @@
 
 <br>
 
-<p align="center">Este projeto se propós a realizar a criação de uma API com o intuito de cosumir dados da API Marvel, realizar autenticação de usuário e disponibilizar dados de Comics e Characters para o usuário. Api feita utilizando NodeJS com DDD patterns</p>
+<p align="center">Este projeto se propós a realizar a criação de uma API com o intuito de cosumir dados da API Marvel, realizar autenticação de usuário e disponibilizar dados de Comics e Characters para o usuário. Api feita utilizando NodeJS abordando conceitos DDD e SOLID</p>
 
 # Documentação da API
 
